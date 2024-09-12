@@ -12,9 +12,25 @@ const getUnis = async (req, res) => {
   }
 };
 
-const getSingleUni = (req, res) => {
-  const { id } = req.params;
-  res.json({ success: true, message: `${id} university details` });
+const getSingleUni = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const uni = await prisma.uni.findUnique({
+      where: {
+        id: +id,
+      },
+    });
+    if (!uni) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'university not found' });
+    }
+    res.json({ success: true, message: uni });
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await prisma.$disconnect();
+  }
 };
 
 module.exports = { getUnis, getSingleUni };
