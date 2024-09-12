@@ -1,5 +1,15 @@
-const getUnis = (req, res) => {
-  res.json({ success: true, message: 'universities route' });
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+const getUnis = async (req, res) => {
+  try {
+    const unis = await prisma.uni.findMany();
+    res.json({ success: true, message: unis });
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await prisma.$disconnect();
+  }
 };
 
 const getSingleUni = (req, res) => {
