@@ -23,8 +23,9 @@ model University {
 
 model Subject {
   id Int @id @default(autoincrement())
+  code Int? @unique
+  intake Int?
   name String
-  keywords String[]
   universities UniversityCourse[]
 }
 
@@ -35,5 +36,9 @@ model UniversityCourse {
   universityId Int
   subject Subject @relation(fields: [subjectId], references: [id])
   subjectId Int
+  keywords String[]
+  duration String? @default("4 Years")
+  medium String? @default("English")
+  uniCode String? @unique
   @@unique([universityId, subjectId], name: "unique_university_course")
 }

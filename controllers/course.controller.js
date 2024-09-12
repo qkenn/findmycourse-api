@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 const getAllCourses = async (req, res) => {
   try {
-    const q = req.query.q || '';
+    const q = req.query.q;
 
     if (q) {
       const courses = await prisma.universityCourse.findMany({
@@ -12,34 +12,49 @@ const getAllCourses = async (req, res) => {
             {
               name: {
                 search: q,
+                mode: 'insensitive',
               },
             },
             {
               subject: {
                 name: {
                   search: q,
+                  mode: 'insensitive',
                 },
               },
             },
             {
-              subject: {
-                keywords: {
-                  has: q,
+              keywords: {
+                has: q,
+              },
+            },
+            {
+              university: {
+                name: {
+                  search: q,
+                  mode: 'insensitive',
                 },
               },
             },
           ],
         },
+        include: {
+          university: true,
+          subject: true,
+        },
       });
 
       if (courses.length === 0) {
+        console.log('course not found');
         return res.sendStatus(404);
       }
 
+      console.dir(courses, { depth: null });
       return res.json(courses);
     }
 
     const courses = await prisma.universityCourse.findMany();
+    console.dir(courses, { depth: null });
     res.json(courses);
   } catch (e) {
     console.error(e);
@@ -51,17 +66,16 @@ const getAllCourses = async (req, res) => {
 const getSingleCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const course = await prisma.course.findUnique({
+    const course = await prisma.universityCourse.findUnique({
       where: {
         id: +id,
       },
     });
     if (!course) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'university not found' });
+      return res.sendStatus(404);
     }
-    res.json({ success: true, message: course });
+
+    res.json(course);
   } catch (e) {
     console.error(e);
   } finally {
