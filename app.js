@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-app.use('/api/unis', uniRouter);
+app.use('/api/universities', uniRouter);
 app.use('/api/courses', courseRouter);
 app.use('*', (req, res) =>
   res.status(404).json({ success: false, message: 'route not found' })

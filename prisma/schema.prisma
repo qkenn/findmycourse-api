@@ -22,9 +22,10 @@ model SubjectArea {
 }
 
 model Stream {
-  id       Int       @id @default(autoincrement())
-  name     String
-  subjects Subject[]
+  id              Int       @id @default(autoincrement())
+  name            String
+  includedStreams String[]
+  subjects        Subject[]
 }
 
 model University {

@@ -4,43 +4,55 @@ const prisma = new PrismaClient();
 const getAllCourses = async (req, res) => {
   try {
     const q = (req.query.q || '').toLowerCase();
+    console.log(q);
 
-    if (q) {
+    const queries = q
+      .split(' ')
+      .map((term) => term.trim())
+      .filter((term) => term.length > 0);
+
+    if (queries.length > 0) {
       const courses = await prisma.universityProgramme.findMany({
         where: {
-          OR: [
-            {
-              name: {
-                search: q,
-                mode: 'insensitive',
-              },
-            },
-            {
-              subject: {
+          OR: queries.map((term) => ({
+            OR: [
+              {
                 name: {
-                  search: q,
-                  mode: 'insensitive',
+                  search: term,
                 },
               },
-            },
-            {
-              keywords: {
-                has: q,
-              },
-            },
-            {
-              university: {
-                name: {
-                  search: q,
-                  mode: 'insensitive',
+              {
+                subject: {
+                  name: {
+                    search: term,
+                  },
                 },
               },
-            },
-          ],
+              {
+                university: {
+                  name: {
+                    search: term,
+                  },
+                },
+              },
+            ],
+          })),
         },
-        include: {
-          university: true,
-          subject: true,
+        select: {
+          id: true,
+          name: true,
+          duration: true,
+          medium: true,
+          subject: {
+            select: {
+              name: true,
+            },
+          },
+          university: {
+            select: {
+              name: true,
+            },
+          },
         },
       });
 
@@ -49,15 +61,20 @@ const getAllCourses = async (req, res) => {
         return res.sendStatus(404);
       }
 
-      console.dir(courses, { depth: null });
       return res.json(courses);
     }
 
-    const courses = await prisma.universityProgramme.findMany();
+    const courses = await prisma.universityProgramme.findMany({
+      include: {
+        subject: true,
+        university: true,
+      },
+    });
     console.dir(courses, { depth: null });
     res.json(courses);
   } catch (e) {
     console.error(e);
+    res.sendStatus(500);
   } finally {
     await prisma.$disconnect();
   }

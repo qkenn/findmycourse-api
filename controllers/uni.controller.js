@@ -3,8 +3,12 @@ const prisma = new PrismaClient();
 
 const getUnis = async (req, res) => {
   try {
-    const unis = await prisma.uni.findMany();
-    res.json({ success: true, message: unis });
+    const unis = await prisma.university.findMany({
+      include: {
+        programmes: true,
+      },
+    });
+    res.json(unis);
   } catch (e) {
     console.error(e);
   } finally {
@@ -15,7 +19,7 @@ const getUnis = async (req, res) => {
 const getSingleUni = async (req, res) => {
   try {
     const { id } = req.params;
-    const uni = await prisma.uni.findUnique({
+    const uni = await prisma.university.findUnique({
       where: {
         id: +id,
       },
@@ -25,7 +29,8 @@ const getSingleUni = async (req, res) => {
         .status(404)
         .json({ success: false, message: 'university not found' });
     }
-    res.json({ success: true, message: uni });
+
+    res.json(uni);
   } catch (e) {
     console.error(e);
   } finally {
