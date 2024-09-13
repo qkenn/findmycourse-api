@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -14,31 +14,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model SubjectArea {
+  id        Int       @id @default(autoincrement())
+  name      String
+  subjects  Subject[]
+  subjectId Int
+}
+
+model Stream {
+  id       Int       @id @default(autoincrement())
+  name     String
+  subjects Subject[]
+}
+
 model University {
-  id Int @id @default(autoincrement())
-  name String
-  location String?
-  courses UniversityCourse[]
+  id         Int                   @id @default(autoincrement())
+  name       String
+  city       String?
+  programmes UniversityProgramme[]
 }
 
 model Subject {
-  id Int @id @default(autoincrement())
-  code Int? @unique
-  intake Int?
-  name String
-  universities UniversityCourse[]
+  id                   Int                   @id @default(autoincrement())
+  code                 String?               @unique
+  intake               Int?
+  name                 String
+  constraints          Json?
+  subjectArea          SubjectArea?          @relation(fields: [subjectAreaId], references: [id])
+  subjectAreaId        Int?
+  universityProgrammes UniversityProgramme[]
+  stream               Stream                @relation(fields: [streamId], references: [id])
+  streamId             Int
 }
 
-model UniversityCourse {
-  id Int @id @default(autoincrement())
-  name String
-  university University @relation(fields: [universityId], references: [id])
+model UniversityProgramme {
+  id           Int        @id @default(autoincrement())
+  name         String
+  abbr         String?
+  university   University @relation(fields: [universityId], references: [id])
   universityId Int
-  subject Subject @relation(fields: [subjectId], references: [id])
-  subjectId Int
-  keywords String[]
-  duration String? @default("4 Years")
-  medium String? @default("English")
-  uniCode String? @unique
+  subject      Subject    @relation(fields: [subjectId], references: [id])
+  subjectId    Int
+  keywords     String[]
+  duration     String?    @default("4 Years")
+  medium       String?    @default("English")
+  uniCode      String?    @unique
+
   @@unique([universityId, subjectId], name: "unique_university_course")
 }

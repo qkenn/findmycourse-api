@@ -3,10 +3,10 @@ const prisma = new PrismaClient();
 
 const getAllCourses = async (req, res) => {
   try {
-    const q = req.query.q;
+    const q = (req.query.q || '').toLowerCase();
 
     if (q) {
-      const courses = await prisma.universityCourse.findMany({
+      const courses = await prisma.universityProgramme.findMany({
         where: {
           OR: [
             {
@@ -53,7 +53,7 @@ const getAllCourses = async (req, res) => {
       return res.json(courses);
     }
 
-    const courses = await prisma.universityCourse.findMany();
+    const courses = await prisma.universityProgramme.findMany();
     console.dir(courses, { depth: null });
     res.json(courses);
   } catch (e) {
@@ -66,7 +66,7 @@ const getAllCourses = async (req, res) => {
 const getSingleCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const course = await prisma.universityCourse.findUnique({
+    const course = await prisma.universityProgramme.findUnique({
       where: {
         id: +id,
       },
