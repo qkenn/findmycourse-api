@@ -35,6 +35,11 @@ const getAllCourses = async (req, res) => {
                   },
                 },
               },
+              {
+                keywords: {
+                  has: term,
+                },
+              },
             ],
           })),
         },
@@ -55,6 +60,11 @@ const getAllCourses = async (req, res) => {
           },
         },
       });
+
+      const count = await prisma.universityProgramme.aggregate({
+        _count: true,
+      });
+      console.log(count);
 
       if (courses.length === 0) {
         console.log('course not found');
