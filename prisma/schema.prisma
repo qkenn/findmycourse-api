@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -14,18 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model SubjectArea {
-  id        Int       @id @default(autoincrement())
-  name      String
-  subjects  Subject[]
-  subjectId Int
+model Subject {
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Course[]
 }
 
 model Stream {
-  id              Int       @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   name            String
   includedStreams String[]
-  subjects        Subject[]
+  courses         Course[]
 }
 
 model University {
@@ -35,14 +33,14 @@ model University {
   programmes UniversityProgramme[]
 }
 
-model Subject {
+model Course {
   id                   Int                   @id @default(autoincrement())
-  code                 String?               @unique
+  courseCode           String?               @unique
   intake               Int?
   name                 String
   constraints          Json?
-  subjectArea          SubjectArea?          @relation(fields: [subjectAreaId], references: [id])
-  subjectAreaId        Int?
+  subject              Subject               @relation(fields: [subjectId], references: [id])
+  subjectId            Int
   universityProgrammes UniversityProgramme[]
   stream               Stream                @relation(fields: [streamId], references: [id])
   streamId             Int
@@ -54,12 +52,12 @@ model UniversityProgramme {
   abbr         String?
   university   University @relation(fields: [universityId], references: [id])
   universityId Int
-  subject      Subject    @relation(fields: [subjectId], references: [id])
-  subjectId    Int
+  course       Course     @relation(fields: [courseId], references: [id])
+  courseId     Int
   keywords     String[]
   duration     String?    @default("4 Years")
   medium       String?    @default("English")
   uniCode      String?    @unique
 
-  @@unique([universityId, subjectId], name: "unique_university_course")
+  @@unique([universityId, courseId], name: "unique_university_course")
 }
