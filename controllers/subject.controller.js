@@ -5,11 +5,6 @@ const getAllSubjects = async (req, res) => {
   try {
     const subjects = await prisma.subject.findMany({
       include: {
-        subjectArea: {
-          select: {
-            name: true,
-          },
-        },
         universityProgrammes: {
           select: {
             name: true,

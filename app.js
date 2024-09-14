@@ -5,7 +5,7 @@ const app = express();
 
 // router imports
 const uniRouter = require('./routes/uni.router');
-const courseRouter = require('./routes/course.router');
+const programmeRouter = require('./routes/programme.router');
 const subjectRouter = require('./routes/subject.router');
 
 // middleware
@@ -14,15 +14,15 @@ app.use(express.json());
 
 // routes
 app.use('/api/universities', uniRouter);
-app.use('/api/courses', courseRouter);
+app.use('/api/programmes', programmeRouter);
 app.use('/api/subjects', subjectRouter);
 app.use('*', (req, res) =>
-  res.status(404).json({ success: false, message: 'route not found' })
+  res.status(404).json({ message: 'route not found' })
 );
 
 // main error middleware
 app.use((err, req, res, next) => {
-  res.status(500).json({ sucess: false, message: 'internal server error' });
+  res.status(500).json({ message: 'internal server error' });
 });
 
 const PORT = process.env.PORT;

@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const getAllCourses = async (req, res) => {
+const getAllProgrammes = async (req, res) => {
   try {
     const q = (req.query.q || '').toLowerCase();
     console.log(q);
@@ -90,7 +90,7 @@ const getAllCourses = async (req, res) => {
   }
 };
 
-const getSingleCourse = async (req, res) => {
+const getSingleProgramme = async (req, res) => {
   try {
     const { id } = req.params;
     const course = await prisma.universityProgramme.findUnique({
@@ -110,4 +110,4 @@ const getSingleCourse = async (req, res) => {
   }
 };
 
-module.exports = { getAllCourses, getSingleCourse };
+module.exports = { getAllProgrammes, getSingleProgramme };

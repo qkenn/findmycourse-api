@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "courseCode": "104",
+    "intake": 920,
+    "name": "Information Communication Technology",
+    "constraints": {
+      "minimum": [
+        "At least 'S' grades for Information & Communication Technology (ICT), Science for Technology (SFT) and Engineering Technology (ET) or Biosystems Technology (BST)."
+      ]
+    },
+    "subjectId": 4
+  },
+  {
+    "id": 2,
+    "courseCode": "104",
+    "intake": 920,
+    "name": "Information Communication Technology",
+    "constraints": {
+      "minimum": [
+        "At least 'S' grades for Information & Communication Technology (ICT), Science for Technology (SFT) and Engineering Technology (ET) or Biosystems Technology (BST)."
+      ]
+    },
+    "subjectId": 4
+  }
+]

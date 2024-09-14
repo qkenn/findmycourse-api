@@ -19,13 +19,6 @@ model Subject {
   courses Course[]
 }
 
-model Stream {
-  id              Int      @id @default(autoincrement())
-  name            String
-  includedStreams String[]
-  courses         Course[]
-}
-
 model University {
   id         Int                   @id @default(autoincrement())
   name       String
@@ -41,8 +34,6 @@ model Course {
   subject              Subject               @relation(fields: [subjectId], references: [id])
   subjectId            Int
   universityProgrammes UniversityProgramme[]
-  stream               Stream                @relation(fields: [streamId], references: [id])
-  streamId             Int
 }
 
 model UniversityProgramme {

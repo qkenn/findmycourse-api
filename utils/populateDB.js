@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const subjects = require('./data/subjects.json');
 const universities = require('./data/universities.json');
-const streams = require('./data/streams.json');
+const courses = require('./data/courses.json');
 
 const prisma = new PrismaClient({
   log: [
@@ -41,7 +41,7 @@ async function createEntries(model, data) {
 async function main() {
   createEntries(prisma.university, universities);
   createEntries(prisma.subject, subjects);
-  createEntries(prisma.stream, streams);
+  createEntries(prisma.course, courses);
 }
 
 main()
