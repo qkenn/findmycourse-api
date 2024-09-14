@@ -27,22 +27,34 @@ prisma.$on('error', (e) => {
 });
 
 async function createEntries(model, data) {
-  await model.deleteMany({});
-
   const created = await model.createManyAndReturn({
     data,
     skipDuplicates: true,
   });
 
-  const count = await model.count({});
+  console.log(created);
+}
 
-  console.log(created, count);
+async function deleteAllEntries() {
+  const deleteUnis = prisma.university.deleteMany();
+  const deleteSubjects = prisma.subject.deleteMany();
+  const deleteCourses = prisma.course.deleteMany();
+  const deleteProgrammes = prisma.programme.deleteMany();
+
+  await prisma.$transaction([
+    deleteProgrammes,
+    deleteUnis,
+    deleteCourses,
+    deleteSubjects,
+  ]);
 }
 
 async function main() {
-  // await createEntries(prisma.university, universities);
-  // await createEntries(prisma.subject, subjects);
-  // await createEntries(prisma.course, courses);
+  await deleteAllEntries();
+
+  await createEntries(prisma.university, universities);
+  await createEntries(prisma.subject, subjects);
+  await createEntries(prisma.course, courses);
   await createEntries(prisma.programme, programmes);
 }
 

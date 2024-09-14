@@ -41,5 +41,19 @@
       ]
     },
     "subjectId": 5
+  },
+  {
+    "id": 3,
+    "courseCode": "023",
+    "intake": 100,
+    "name": "Architecure",
+    "subjectId": 5
+  },
+  {
+    "id": 4,
+    "courseCode": "034",
+    "intake": 79,
+    "name": "Fashion Design & Product Development",
+    "subjectId": 19
   }
 ]

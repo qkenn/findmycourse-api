@@ -13,5 +13,28 @@
       "architecure"
     ],
     "uniCode": "030G"
+  },
+  {
+    "id": 2,
+    "name": "Bachelor of Architecture",
+    "universityId": 5,
+    "courseId": 3,
+    "duration": "5 Years",
+    "keywords": [
+      "engineering",
+      "engineer",
+      "architecure",
+      "design",
+      "construction"
+    ],
+    "uniCode": "030G"
+  },
+  {
+    "id": 3,
+    "name": "Bachelor of Design",
+    "universityId": 5,
+    "courseId": 4,
+    "keywords": ["design", "fashion", "clothes", "apperal"],
+    "uniCode": "030G"
   }
 ]

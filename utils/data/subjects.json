@@ -1,6 +1,6 @@
 [
   { "id": 1, "name": "Agriculture" },
-  { "id": 2, "name": "Arts, Design and Media" },
+  { "id": 2, "name": "Arts" },
   { "id": 3, "name": "Business and Economics" },
   { "id": 4, "name": "Computing" },
   { "id": 5, "name": "Engineering" },
@@ -16,5 +16,6 @@
   { "id": 15, "name": "Religous Studies" },
   { "id": 16, "name": "Social Studies and Behavioural Science" },
   { "id": 17, "name": "Social Work and Welfare" },
-  { "id": 18, "name": "Technology" }
+  { "id": 18, "name": "Technology" },
+  { "id": 19, "name": "Design and Development" }
 ]
