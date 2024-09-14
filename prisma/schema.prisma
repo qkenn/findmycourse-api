@@ -20,23 +20,23 @@ model Subject {
 }
 
 model University {
-  id         Int                   @id @default(autoincrement())
+  id         Int         @id @default(autoincrement())
   name       String
-  programmes UniversityProgramme[]
+  programmes Programme[]
 }
 
 model Course {
-  id                   Int                   @id @default(autoincrement())
-  courseCode           String?               @unique
-  intake               Int?
-  name                 String
-  constraints          Json?
-  subject              Subject               @relation(fields: [subjectId], references: [id])
-  subjectId            Int
-  universityProgrammes UniversityProgramme[]
+  id          Int         @id @default(autoincrement())
+  courseCode  String?     @unique
+  intake      Int?
+  name        String
+  constraints Json?
+  subject     Subject     @relation(fields: [subjectId], references: [id])
+  subjectId   Int
+  programmes  Programme[]
 }
 
-model UniversityProgramme {
+model Programme {
   id           Int        @id @default(autoincrement())
   name         String
   abbr         String?

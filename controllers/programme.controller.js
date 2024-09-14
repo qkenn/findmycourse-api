@@ -12,7 +12,7 @@ const getAllProgrammes = async (req, res) => {
       .filter((term) => term.length > 0);
 
     if (queries.length > 0) {
-      const courses = await prisma.universityProgramme.findMany({
+      const courses = await prisma.programme.findMany({
         where: {
           OR: queries.map((term) => ({
             OR: [
@@ -61,11 +61,6 @@ const getAllProgrammes = async (req, res) => {
         },
       });
 
-      const count = await prisma.universityProgramme.aggregate({
-        _count: true,
-      });
-      console.log(count);
-
       if (courses.length === 0) {
         console.log('course not found');
         return res.sendStatus(404);
@@ -74,10 +69,18 @@ const getAllProgrammes = async (req, res) => {
       return res.json(courses);
     }
 
-    const courses = await prisma.universityProgramme.findMany({
+    const courses = await prisma.programme.findMany({
       include: {
-        subject: true,
-        university: true,
+        course: {
+          select: {
+            name: true,
+          },
+        },
+        university: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
     console.dir(courses, { depth: null });
@@ -93,7 +96,7 @@ const getAllProgrammes = async (req, res) => {
 const getSingleProgramme = async (req, res) => {
   try {
     const { id } = req.params;
-    const course = await prisma.universityProgramme.findUnique({
+    const course = await prisma.programme.findUnique({
       where: {
         id: +id,
       },

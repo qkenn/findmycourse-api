@@ -5,7 +5,7 @@ const getAllCourses = async (req, res) => {
   try {
     const subjects = await prisma.course.findMany({
       include: {
-        universityProgrammes: {
+        programmes: {
           select: {
             name: true,
           },
