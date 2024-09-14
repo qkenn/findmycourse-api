@@ -29,7 +29,6 @@ model Stream {
 model University {
   id         Int                   @id @default(autoincrement())
   name       String
-  city       String?
   programmes UniversityProgramme[]
 }
 

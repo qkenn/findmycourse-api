@@ -1,0 +1,20 @@
+[
+  { "id": 1, "name": "Agriculture" },
+  { "id": 2, "name": "Arts, Design and Media" },
+  { "id": 3, "name": "Business and Economics" },
+  { "id": 4, "name": "Computing" },
+  { "id": 5, "name": "Engineering" },
+  { "id": 6, "name": "Education" },
+  { "id": 7, "name": "Medicine and Healthcare" },
+  { "id": 8, "name": "Humanities" },
+  { "id": 9, "name": "Journalism, Communication and Information" },
+  { "id": 10, "name": "Languages" },
+  { "id": 11, "name": "Law and Legal Studies" },
+  { "id": 12, "name": "Construction and Manufacturing" },
+  { "id": 13, "name": "Mathematics" },
+  { "id": 14, "name": "Natural Science" },
+  { "id": 15, "name": "Religous Studies" },
+  { "id": 16, "name": "Social Studies and Behavioural Science" },
+  { "id": 17, "name": "Social Work and Welfare" },
+  { "id": 18, "name": "Technology" }
+]

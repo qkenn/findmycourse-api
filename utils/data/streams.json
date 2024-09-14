@@ -1,0 +1,13 @@
+[
+  { "id": 1, "name": "Arts", "includedStreams": ["Arts"] },
+  { "id": 2, "name": "Bio", "includedStreams": ["Biological Science"] },
+  { "id": 3, "name": "Maths", "includedStreams": ["Physical Science"] },
+  { "id": 4, "name": "Commerce", "includedStreams": ["Commerce"] },
+  {
+    "id": 5,
+    "name": "Biosystems",
+    "includedStreams": ["Biosystems Technology"]
+  },
+  { "id": 6, "name": "Commerce", "includedStreams": ["Commerce"] },
+  { "id": 4, "name": "Commerce", "includedStreams": ["Commerce"] }
+]

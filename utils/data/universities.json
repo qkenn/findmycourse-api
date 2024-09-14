@@ -1,0 +1,28 @@
+[
+  { "id": 1, "name": "University of Colombo" },
+  { "id": 2, "name": "University of Peradeniya" },
+  { "id": 3, "name": "University of Sri Jayewardenepura" },
+  { "id": 4, "name": "University of Kelaniya" },
+  { "id": 5, "name": "University of Moratuwa" },
+  { "id": 6, "name": "University of Jaffna" },
+  { "id": 7, "name": "University of Ruhuna" },
+  { "id": 8, "name": "Eastern University, Sri Lanka" },
+  { "id": 9, "name": "South Eastern University of Sri Lanka" },
+  { "id": 10, "name": "Rajarata University of Sri Lanka" },
+  { "id": 11, "name": "Sabaragamuwa University of Sri Lanka" },
+  { "id": 12, "name": "Wayamba University of Sri Lanka" },
+  { "id": 13, "name": "Uva Wellassa University of Sri Lanka" },
+  { "id": 14, "name": "University of the Visual & Performing Arts" },
+  {
+    "id": 15,
+    "name": "Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka"
+  },
+  { "id": 16, "name": "University of Vavuniya, Sri Lanka" },
+  { "id": 17, "name": "Sripalee Campus, University of Colombo" },
+  { "id": 18, "name": "Trincomalee Campus, Eastern University, Sri Lanka" },
+  { "id": 19, "name": "University of Colombo School of Computing" },
+  {
+    "id": 20,
+    "name": "Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka"
+  }
+]
