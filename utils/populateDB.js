@@ -39,9 +39,9 @@ async function createEntries(model, data) {
 }
 
 async function main() {
-  createEntries(prisma.university, universities);
-  createEntries(prisma.subject, subjects);
-  createEntries(prisma.course, courses);
+  // await createEntries(prisma.university, universities);
+  // await createEntries(prisma.subject, subjects);
+  await createEntries(prisma.course, courses);
 }
 
 main()

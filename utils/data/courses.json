@@ -13,14 +13,33 @@
   },
   {
     "id": 2,
-    "courseCode": "104",
-    "intake": 920,
-    "name": "Information Communication Technology",
+    "courseCode": "030",
+    "intake": 88,
+    "name": "Town & Country Planning",
     "constraints": {
       "minimum": [
-        "At least 'S' grades for Information & Communication Technology (ICT), Science for Technology (SFT) and Engineering Technology (ET) or Biosystems Technology (BST)."
+        {
+          "rule": "At least Ordinary Passes (S) in three subjects from the following subjects at the G.C.E. (Advanced Level) Examination",
+          "subjects": [
+            "Combined Mathematics",
+            "Chemistry",
+            "Physics",
+            "Biology"
+          ]
+        },
+        {
+          "rule": "One or two subject/s from the above and the subject/subjects from the following subjects.",
+          "subjects": ["Accounting", "Agricultural Science"]
+        },
+        {
+          "rule": "In addition to that, candidates should have satisfied the following requirements at the G.C.E. (Ordinary Level) Examination",
+          "subjects": [
+            "(a) At least a Very Good Pass (B) in English",
+            "(b) At least a Credit Pass (C) in Mathematics"
+          ]
+        }
       ]
     },
-    "subjectId": 4
+    "subjectId": 5
   }
 ]
