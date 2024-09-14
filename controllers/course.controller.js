@@ -1,11 +1,11 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const getAllSubjects = async (req, res) => {
+const getAllCourses = async (req, res) => {
   try {
-    const subjects = await prisma.subject.findMany({
+    const subjects = await prisma.course.findMany({
       include: {
-        courses: {
+        universityProgrammes: {
           select: {
             name: true,
           },
@@ -22,10 +22,10 @@ const getAllSubjects = async (req, res) => {
   }
 };
 
-const getSingleSubject = async (req, res) => {
+const getSingleCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const subject = await prisma.subject.findUnique({
+    const subject = await prisma.course.findUnique({
       where: {
         id: +id,
       },
@@ -42,4 +42,4 @@ const getSingleSubject = async (req, res) => {
   }
 };
 
-module.exports = { getAllSubjects, getSingleSubject };
+module.exports = { getAllCourses, getSingleCourse };

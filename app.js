@@ -7,6 +7,7 @@ const app = express();
 const uniRouter = require('./routes/uni.router');
 const programmeRouter = require('./routes/programme.router');
 const subjectRouter = require('./routes/subject.router');
+const courseRouter = require('./routes/course.router');
 
 // middleware
 app.use(cors());
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/universities', uniRouter);
 app.use('/api/programmes', programmeRouter);
 app.use('/api/subjects', subjectRouter);
+app.use('/api/courses', courseRouter);
 app.use('*', (req, res) =>
   res.status(404).json({ message: 'route not found' })
 );
