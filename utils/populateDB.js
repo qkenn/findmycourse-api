@@ -1,30 +1,17 @@
 const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const subjects = require('./data/subjects.json');
 const universities = require('./data/universities.json');
 const courses = require('./data/courses.json');
 const programmes = require('./data/programmes.json');
 
-const prisma = new PrismaClient({
-  log: [
-    { level: 'warn', emit: 'event' },
-    { level: 'info', emit: 'event' },
-    { level: 'error', emit: 'event' },
-  ],
-  errorFormat: 'pretty',
-});
-
-prisma.$on('warn', (e) => {
-  console.log(e);
-});
-
-prisma.$on('info', (e) => {
-  console.log(e);
-});
-
-prisma.$on('error', (e) => {
-  console.log(e);
-});
+const models = [
+  { model: prisma.university, data: universities },
+  { model: prisma.subject, data: subjects },
+  { model: prisma.course, data: courses },
+  { model: prisma.programme, data: programmes },
+];
 
 async function createEntries(model, data) {
   const created = await model.createManyAndReturn({
@@ -36,26 +23,20 @@ async function createEntries(model, data) {
 }
 
 async function deleteAllEntries() {
-  const deleteUnis = prisma.university.deleteMany();
-  const deleteSubjects = prisma.subject.deleteMany();
-  const deleteCourses = prisma.course.deleteMany();
-  const deleteProgrammes = prisma.programme.deleteMany();
-
   await prisma.$transaction([
-    deleteProgrammes,
-    deleteUnis,
-    deleteCourses,
-    deleteSubjects,
+    prisma.programme.deleteMany(),
+    prisma.university.deleteMany(),
+    prisma.course.deleteMany(),
+    prisma.subject.deleteMany(),
   ]);
 }
 
 async function main() {
   await deleteAllEntries();
 
-  await createEntries(prisma.university, universities);
-  await createEntries(prisma.subject, subjects);
-  await createEntries(prisma.course, courses);
-  await createEntries(prisma.programme, programmes);
+  for (const m of models) {
+    await createEntries(m.model, m.data);
+  }
 }
 
 main()
