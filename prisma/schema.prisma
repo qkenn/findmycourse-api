@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -47,7 +48,5 @@ model Programme {
   keywords     String[]
   duration     String?    @default("4 Years")
   medium       String?    @default("English")
-  uniCode      String?    @unique
-
-  @@unique([universityId, courseId], name: "unique_university_course")
+  uniCode      String?
 }

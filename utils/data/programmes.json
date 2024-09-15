@@ -26,15 +26,74 @@
       "architecure",
       "design",
       "construction"
-    ],
-    "uniCode": "030G"
+    ]
   },
   {
     "id": 3,
     "name": "Bachelor of Design",
     "universityId": 5,
     "courseId": 4,
-    "keywords": ["design", "fashion", "clothes", "apperal"],
-    "uniCode": "030G"
+    "keywords": ["design", "fashion", "clothes", "apperal"]
+  },
+  {
+    "id": 4,
+    "name": "Bachelor of Laws",
+    "universityId": 1,
+    "courseId": 5,
+    "keywords": ["legal", "court", "lawyer", "constitution"],
+    "uniCode": "025A"
+  },
+  {
+    "id": 5,
+    "name": "Bachelor of Laws",
+    "universityId": 2,
+    "courseId": 5,
+    "keywords": ["legal", "court", "lawyer", "constitution"],
+    "uniCode": "025B"
+  },
+  {
+    "id": 6,
+    "name": "Bachelor of Laws",
+    "universityId": 6,
+    "courseId": 5,
+    "keywords": ["legal", "court", "lawyer", "constitution"],
+    "uniCode": "025E"
+  },
+  {
+    "id": 7,
+    "name": "Bachelor of Science Honours in Facilities Management",
+    "universityId": 5,
+    "courseId": 6,
+    "keywords": ["engineering", "engineer", "facility"],
+    "uniCode": "056G"
+  },
+  {
+    "id": 8,
+    "name": "Bachelor of Science Honours  in Science & Technology",
+    "universityId": 13,
+    "courseId": 7,
+    "keywords": ["tech", "materials", "mechatronics"]
+  },
+  {
+    "id": 9,
+    "name": "Bachelor of Science Honours in Computer Science and Technology",
+    "universityId": 13,
+    "courseId": 7,
+    "keywords": ["tech", "computer", "computing", "software"]
+  },
+  {
+    "id": 10,
+    "name": "Bachelor of Business Management Honours in Entrepreneurship and Management",
+    "universityId": 13,
+    "courseId": 7,
+    "keywords": ["entrepreneur"]
+  },
+  {
+    "id": 11,
+    "name": "Bachelor of Science Honours in Physical Education",
+    "universityId": 11,
+    "courseId": 10,
+    "keywords": [""],
+    "uniCode": "081L"
   }
 ]

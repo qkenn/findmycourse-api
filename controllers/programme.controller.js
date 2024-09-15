@@ -18,20 +18,23 @@ const getAllProgrammes = async (req, res) => {
             OR: [
               {
                 name: {
-                  search: term,
+                  contains: term,
+                  mode: 'insensitive',
                 },
               },
               {
-                subject: {
+                course: {
                   name: {
-                    search: term,
+                    contains: term,
+                    mode: 'insensitive',
                   },
                 },
               },
               {
                 university: {
                   name: {
-                    search: term,
+                    contains: term,
+                    mode: 'insensitive',
                   },
                 },
               },
@@ -48,7 +51,7 @@ const getAllProgrammes = async (req, res) => {
           name: true,
           duration: true,
           medium: true,
-          subject: {
+          course: {
             select: {
               name: true,
             },

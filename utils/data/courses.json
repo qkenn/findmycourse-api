@@ -55,5 +55,47 @@
     "intake": 79,
     "name": "Fashion Design & Product Development",
     "subjectId": 19
+  },
+  {
+    "id": 5,
+    "courseCode": "025",
+    "intake": 495,
+    "name": "Law",
+    "subjectId": 11
+  },
+  {
+    "id": 6,
+    "courseCode": "056",
+    "intake": 81,
+    "name": "Facilities Management",
+    "subjectId": 5
+  },
+  {
+    "id": 7,
+    "courseCode": "064",
+    "intake": 107,
+    "name": "Sciencee and Technology",
+    "subjectId": 18
+  },
+  {
+    "id": 8,
+    "courseCode": "065",
+    "intake": 101,
+    "name": "Computer Sciencee and Technology",
+    "subjectId": 4
+  },
+  {
+    "id": 9,
+    "courseCode": "066",
+    "intake": 101,
+    "name": "Entrepreneurship and Management",
+    "subjectId": 3
+  },
+  {
+    "id": 10,
+    "courseCode": "081",
+    "intake": 147,
+    "name": "Physical Education",
+    "subjectId": 16
   }
 ]

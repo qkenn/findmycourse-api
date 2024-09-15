@@ -8,6 +8,7 @@ const getAllCourses = async (req, res) => {
         programmes: {
           select: {
             name: true,
+            university: true,
           },
         },
       },
