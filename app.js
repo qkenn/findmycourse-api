@@ -9,22 +9,23 @@ const programmeRouter = require('./routes/programme.router');
 const subjectRouter = require('./routes/subject.router');
 const courseRouter = require('./routes/course.router');
 
+const searchController = require('./controllers/search.controller');
+
 // middleware
 app.use(cors());
 app.use(express.json());
 
 // routes
+app.use('/api/search', searchController);
 app.use('/api/universities', uniRouter);
 app.use('/api/programmes', programmeRouter);
 app.use('/api/subjects', subjectRouter);
 app.use('/api/courses', courseRouter);
-app.use('*', (req, res) =>
-  res.status(404).json({ message: 'route not found' })
-);
+app.use('*', (req, res) => res.status(404));
 
 // main error middleware
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: 'internal server error' });
+  res.status(500);
 });
 
 const PORT = process.env.PORT;
