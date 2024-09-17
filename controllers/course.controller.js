@@ -30,6 +30,10 @@ const getSingleCourse = async (req, res) => {
       where: {
         id: +id,
       },
+      include: {
+        subject: true,
+        programmes: true,
+      },
     });
     if (!subject) {
       return res.sendStatus(404);

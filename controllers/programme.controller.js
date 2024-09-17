@@ -64,8 +64,7 @@ const getAllProgrammes = async (req, res) => {
         },
       });
 
-      if (courses.length === 0) {
-        console.log('course not found');
+      if (courses.length < 1) {
         return res.sendStatus(404);
       }
 

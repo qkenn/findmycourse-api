@@ -7,6 +7,7 @@ const getAllSubjects = async (req, res) => {
       include: {
         courses: {
           select: {
+            id: true,
             name: true,
           },
         },
