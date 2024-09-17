@@ -46,22 +46,13 @@ async function searchDB(req, res) {
             ],
           })),
         },
-        select: {
-          id: true,
-          name: true,
-          duration: true,
-          medium: true,
+        include: {
+          university: true,
           course: {
-            select: {
-              name: true,
+            include: {
+              subject: true,
             },
           },
-          university: {
-            select: {
-              name: true,
-            },
-          },
-          keywords: true,
         },
       });
 
@@ -102,14 +93,10 @@ async function searchDB(req, res) {
     // get all programmes when there are no queries
     const programmes = await prisma.programme.findMany({
       include: {
+        university: true,
         course: {
-          select: {
-            name: true,
-          },
-        },
-        university: {
-          select: {
-            name: true,
+          include: {
+            subject: true,
           },
         },
       },
