@@ -95,5 +95,343 @@
     "courseId": 10,
     "keywords": [""],
     "uniCode": "081L"
+  },
+  {
+    "id": 12,
+    "name": "Bachelor of Arts Honours in Performing Arts",
+    "universityId": 17,
+    "courseId": 13,
+    "keywords": ["perform", "performing", "acting", "actor"],
+    "uniCode": "041S"
+  },
+  {
+    "id": 13,
+    "name": "Bachelor of Arts Honours in Mass Media",
+    "universityId": 17,
+    "courseId": 12,
+    "keywords": ["media", "journalism", "presenter", "journaler"],
+    "uniCode": "041S"
+  },
+  {
+    "id": 14,
+    "name": "Bachelor of Arts Honours",
+    "universityId": 11,
+    "courseId": 14,
+    "uniCode": "041S"
+  },
+  {
+    "id": 15,
+    "name": "Bachelor of Arts",
+    "universityId": 11,
+    "courseId": 14,
+    "uniCode": "041S",
+    "duration": "3 Years"
+  },
+  {
+    "id": 16,
+    "name": "Bachelor of Arts in Communication Studies",
+    "universityId": 18,
+    "courseId": 15,
+    "uniCode": "041S"
+  },
+  {
+    "id": 17,
+    "name": "Bachelor of Arts in Languages",
+    "universityId": 18,
+    "courseId": 15,
+    "uniCode": "041S"
+  },
+  {
+    "id": 18,
+    "name": "Bachelor of Arts Honours in Peace and Conflict Resolution",
+    "universityId": 4,
+    "courseId": 16,
+    "uniCode": "041S"
+  },
+  {
+    "id": 19,
+    "name": "Bachelor of Arts in Islamic Studies",
+    "universityId": 9,
+    "courseId": 17,
+    "uniCode": "041S",
+    "duration": "3 Years"
+  },
+  {
+    "id": 20,
+    "name": "Bachelor of Arts in Arabic Language",
+    "universityId": 9,
+    "courseId": 18,
+    "uniCode": "041S",
+    "duration": "3 Years"
+  },
+  {
+    "id": 21,
+    "name": "Bachelor of Arts Honours in TESL",
+    "universityId": 4,
+    "courseId": 19,
+    "uniCode": "041S"
+  },
+  {
+    "id": 22,
+    "name": "Bachelor of Arts Honours in Music",
+    "universityId": 3,
+    "courseId": 20,
+    "uniCode": "041S"
+  },
+  {
+    "id": 23,
+    "name": "Bachelor of Social Work Honours",
+    "universityId": 3,
+    "courseId": 21,
+    "uniCode": "041S"
+  },
+  {
+    "id": 24,
+    "name": "Bachelor of Arts Honours in Information Technology",
+    "universityId": 3,
+    "courseId": 22,
+    "uniCode": "041S"
+  },
+  {
+    "id": 25,
+    "name": "Bachelor of Business Administration Honours",
+    "universityId": 1,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 26,
+    "name": "Bachelor of Business Administration Honours in Finance",
+    "universityId": 1,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 27,
+    "name": "Bachelor of Science Honours in Business Administration",
+    "universityId": 3,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 28,
+    "name": "Bachelor of Science Honours in Management (Public)",
+    "universityId": 3,
+    "courseId": 24,
+    "uniCode": "041S"
+  },
+  {
+    "id": 29,
+    "name": "Bachelor of Business Management Honours in Human Resource",
+    "universityId": 4,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 30,
+    "name": "Bachelor of Business Management Honours in Accountancy",
+    "universityId": 4,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 31,
+    "name": "Bachelor of Business Administration Honours in Tourism and Hospitality Management",
+    "universityId": 6,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 32,
+    "name": "Bachelor of Business Administration Honours in Accounting",
+    "universityId": 6,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 33,
+    "name": "Bachelor of Business Administration Honours in Accounting",
+    "universityId": 7,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 34,
+    "name": "Bachelor of Business Administration Honours in Business Management",
+    "universityId": 7,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 35,
+    "name": "Bachelor of Business Administration Honours",
+    "universityId": 8,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 36,
+    "name": "Bachelor of Business Administration Honours in Marketing Management",
+    "universityId": 8,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 37,
+    "name": "Bachelor of Business Administration Honours",
+    "universityId": 9,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 38,
+    "name": "Bachelor of Commerce Honours",
+    "universityId": 9,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 39,
+    "name": "Bachelor of Science Honours in Accountancy & Finance",
+    "universityId": 10,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 40,
+    "name": "Bachelor of Science Honours in Business Management",
+    "universityId": 10,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 41,
+    "name": "Bachelor of Science Honours in Accountancy & Business Finance",
+    "universityId": 12,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 42,
+    "name": "Bachelor of Science Honours in Banking & Business Finance",
+    "universityId": 12,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 43,
+    "name": "Bachelor of Science Honours in Business Management",
+    "universityId": 11,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 44,
+    "name": "Bachelor of Science Honours in Financial Management",
+    "universityId": 11,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 45,
+    "name": "Bachelor of Business Administration Honours in Human Resource Management",
+    "universityId": 2,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 46,
+    "name": "Bachelor of Business Administration Honours in Marketing Management",
+    "universityId": 2,
+    "courseId": 26,
+    "uniCode": "041S"
+  },
+  {
+    "id": 47,
+    "name": "Bachelor of Business Management",
+    "universityId": 16,
+    "courseId": 27,
+    "uniCode": "041S"
+  },
+  {
+    "id": 48,
+    "name": "Bachelor of Business Management Honours in Accounting & Finance",
+    "universityId": 16,
+    "courseId": 27,
+    "uniCode": "041S"
+  },
+  {
+    "id": 49,
+    "name": "Bachelor of Business Management Honours in Marketing Management",
+    "universityId": 16,
+    "courseId": 27,
+    "uniCode": "041S"
+  },
+  {
+    "id": 50,
+    "name": "Bachelor of Science Honours in Management",
+    "universityId": 18,
+    "courseId": 27,
+    "uniCode": "041S"
+  },
+  {
+    "id": 51,
+    "name": "Bachelor of Science Honours in Marketing Management",
+    "universityId": 18,
+    "courseId": 27,
+    "uniCode": "041S"
+  },
+  {
+    "id": 52,
+    "name": "Bachelor of Science Honours in Business Information Systems",
+    "universityId": 3,
+    "courseId": 28,
+    "uniCode": "041S"
+  },
+  {
+    "id": 53,
+    "name": "Bachelor of Business Management Honours in Accounting Information Systems",
+    "universityId": 4,
+    "courseId": 29,
+    "uniCode": "041S"
+  },
+  {
+    "id": 54,
+    "name": "Bachelor of Business Management Honours in Banking and Insurance",
+    "universityId": 16,
+    "courseId": 30,
+    "uniCode": "041S"
+  },
+  {
+    "id": 55,
+    "name": "Bachelor of Science in Medicine",
+    "universityId": 1,
+    "courseId": 31,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 56,
+    "name": "Bachelor of Science in Medicine",
+    "universityId": 2,
+    "courseId": 31,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 57,
+    "name": "Bachelor of Science in Medicine",
+    "universityId": 6,
+    "courseId": 31,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 58,
+    "name": "Bachelor of Science in Medicine",
+    "universityId": 7,
+    "courseId": 31,
+    "uniCode": "041S",
+    "duration": "5 Years"
   }
 ]

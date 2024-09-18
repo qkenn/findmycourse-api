@@ -23,6 +23,14 @@ const getSingleUni = async (req, res) => {
       where: {
         id: +id,
       },
+      include: {
+        programmes: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
     });
 
     if (!uni) {

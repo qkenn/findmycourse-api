@@ -38,15 +38,16 @@ model Course {
 }
 
 model Programme {
-  id           Int        @id @default(autoincrement())
-  name         String
-  abbr         String?
-  university   University @relation(fields: [universityId], references: [id])
-  universityId Int
-  course       Course     @relation(fields: [courseId], references: [id])
-  courseId     Int
-  keywords     String[]
-  duration     String?    @default("4 Years")
-  medium       String?    @default("English")
-  uniCode      String?
+  id             Int        @id @default(autoincrement())
+  name           String
+  specialization String?
+  abbr           String?
+  university     University @relation(fields: [universityId], references: [id])
+  universityId   Int
+  course         Course     @relation(fields: [courseId], references: [id])
+  courseId       Int
+  keywords       String[]
+  duration       String?    @default("4 Years")
+  medium         String?    @default("English")
+  uniCode        String?
 }
