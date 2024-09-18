@@ -12,6 +12,7 @@ const getAllProgrammes = async (req, res) => {
         },
         university: {
           select: {
+            id: true,
             name: true,
           },
         },
@@ -34,6 +35,9 @@ const getSingleProgramme = async (req, res) => {
     const course = await prisma.programme.findUnique({
       where: {
         id: +id,
+      },
+      include: {
+        university: true,
       },
     });
 

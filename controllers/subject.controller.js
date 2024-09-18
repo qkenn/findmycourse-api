@@ -30,7 +30,22 @@ const getSingleSubject = async (req, res) => {
       where: {
         id: +id,
       },
+      include: {
+        courses: {
+          select: {
+            id: true,
+            name: true,
+            programmes: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
     });
+
     if (!subject) {
       return res.sendStatus(404);
     }

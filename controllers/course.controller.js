@@ -7,10 +7,17 @@ const getAllCourses = async (req, res) => {
       include: {
         programmes: {
           select: {
+            id: true,
             name: true,
-            university: true,
+            university: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
+        subject: true,
       },
     });
     console.dir(subjects, { depth: null });
