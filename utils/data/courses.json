@@ -244,5 +244,61 @@
     "intake": 2088,
     "name": "Medicine",
     "subjectId": 7
+  },
+  {
+    "id": 32,
+    "courseCode": "002",
+    "intake": 130,
+    "name": "Dental Surgery",
+    "subjectId": 7
+  },
+  {
+    "id": 33,
+    "courseCode": "003",
+    "intake": 130,
+    "name": "Veterinary Science",
+    "subjectId": 7
+  },
+  {
+    "id": 34,
+    "courseCode": "039",
+    "intake": 221,
+    "name": "Agricultural Technology & Management",
+    "subjectId": 1
+  },
+  {
+    "id": 35,
+    "courseCode": "004",
+    "intake": 889,
+    "name": "Agricultural Technology & Management",
+    "subjectId": 1
+  },
+  {
+    "id": 36,
+    "courseCode": "005",
+    "intake": 165,
+    "name": "Food Science & Nutrition",
+    "subjectId": 1
+  },
+  {
+    "id": 37,
+    "courseCode": "035",
+    "intake": 218,
+    "name": "Food Science & Technology",
+    "subjectId": 1
+  },
+  {
+    "id": 38,
+    "courseCode": "032",
+    "intake": 383,
+    "name": "Ayurvedic Medicine and Surgery",
+    "subjectId": 7
+  },
+  {
+    "id": 39,
+    "courseCode": "033",
+    "intake": 89,
+    "name": "Unani Medicine and Surgery",
+    "subjectId": 7
   }
 ]

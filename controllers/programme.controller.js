@@ -37,7 +37,18 @@ const getSingleProgramme = async (req, res) => {
         id: +id,
       },
       include: {
-        university: true,
+        university: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        course: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
     });
 

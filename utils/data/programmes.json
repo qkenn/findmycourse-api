@@ -433,5 +433,128 @@
     "courseId": 31,
     "uniCode": "041S",
     "duration": "5 Years"
+  },
+  {
+    "id": 59,
+    "name": "Bachelor of Science in Dental Surgery",
+    "universityId": 2,
+    "courseId": 32,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 60,
+    "name": "Bachelor of Science in Dental Surgery",
+    "universityId": 3,
+    "courseId": 32,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 61,
+    "name": "Bachelor of Science in Veterinary Science",
+    "universityId": 2,
+    "courseId": 33,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 62,
+    "name": "Bachelor of Science in Agricultural Technology & Management",
+    "universityId": 2,
+    "courseId": 34,
+    "uniCode": "041S"
+  },
+  {
+    "id": 63,
+    "name": "Bachelor of Science in Agriculture",
+    "universityId": 11,
+    "courseId": 35,
+    "uniCode": "041S"
+  },
+  {
+    "id": 64,
+    "name": "Bachelor of Science Honours in Agriculture",
+    "universityId": 8,
+    "courseId": 35,
+    "uniCode": "041S"
+  },
+  {
+    "id": 65,
+    "name": "Bachelor of Science Honours in Agriculture",
+    "universityId": 6,
+    "courseId": 35,
+    "uniCode": "041S"
+  },
+  {
+    "id": 66,
+    "name": "Bachelor of Science Honours in Agriculture",
+    "universityId": 10,
+    "courseId": 35,
+    "uniCode": "041S"
+  },
+  {
+    "id": 67,
+    "name": "Bachelor of Science Honours in Agriculture",
+    "universityId": 12,
+    "courseId": 35,
+    "uniCode": "041S"
+  },
+  {
+    "id": 68,
+    "name": "Bachelor of Science Honours in Food Science & Nutrition",
+    "abbr": "BScHons (Food Sc & Nutr)",
+    "specializations": ["Food Science & Technology", "Applied Nutrition"],
+    "universityId": 12,
+    "courseId": 36,
+    "uniCode": "041S"
+  },
+  {
+    "id": 69,
+    "name": "Bachelor of Science Honours in Food Science & Technology",
+    "universityId": 2,
+    "courseId": 37,
+    "uniCode": "041S"
+  },
+  {
+    "id": 70,
+    "name": "Bachelor of Science Honours in Food Science & Technology",
+    "universityId": 11,
+    "courseId": 37,
+    "uniCode": "041S"
+  },
+  {
+    "id": 71,
+    "name": "Bachelor of Science Honours in Food Science & Technology",
+    "universityId": 3,
+    "courseId": 37,
+    "uniCode": "041S"
+  },
+  {
+    "id": 72,
+    "name": "Bachelor of Ayurvedic Medicine and Surgery",
+    "abbr": "(B.A.M.S)",
+    "universityId": 1,
+    "courseId": 38,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 73,
+    "name": "Bachelor of Ayurvedic Medicine and Surgery",
+    "abbr": "(B.A.M.S)",
+    "universityId": 15,
+    "courseId": 38,
+    "uniCode": "041S",
+    "duration": "5 Years"
+  },
+  {
+    "id": 74,
+    "name": "Bachelor of Unani Medicine and Surgery",
+    "abbr": "(B.U.M.S)",
+    "universityId": 1,
+    "courseId": 39,
+    "uniCode": "041S",
+    "duration": "5 Years"
   }
 ]
