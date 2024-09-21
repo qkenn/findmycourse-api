@@ -11,6 +11,141 @@ async function searchDB(req, res) {
       .filter((term) => term.length > 0);
     const page = isNaN(+(req.query.page || 1)) ? 1 : +(req.query.page || 1);
     const pageSize = 8;
+    const universityFilter = (req.query.university || '')
+      .split(',')
+      .map((term) => term.trim())
+      .filter((term) => term.length > 0)
+      .map((term) => {
+        const number = Number(term);
+        return isNaN(number) ? term : number;
+      });
+
+    console.log(universityFilter);
+
+    if (universityFilter.length > 0 && queries.length > 0) {
+      const [programmes] = await Promise.all([
+        await prisma.programme.findMany({
+          skip: (page - 1) * pageSize,
+          take: pageSize,
+          where: {
+            AND: [
+              {
+                OR: queries.map((term) => ({
+                  OR: [
+                    {
+                      name: {
+                        contains: term,
+                        mode: 'insensitive',
+                      },
+                    },
+                    {
+                      course: {
+                        name: {
+                          contains: term,
+                          mode: 'insensitive',
+                        },
+                      },
+                    },
+                    {
+                      university: {
+                        name: {
+                          contains: term,
+                          mode: 'insensitive',
+                        },
+                      },
+                    },
+                    {
+                      keywords: {
+                        has: term,
+                      },
+                    },
+                  ],
+                })),
+              },
+              {
+                university: {
+                  id: {
+                    in: universityFilter,
+                  },
+                },
+              },
+            ],
+          },
+          select: {
+            id: true,
+            name: true,
+            duration: true,
+            medium: true,
+            keywords: true,
+            university: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+            course: {
+              select: {
+                id: true,
+                name: true,
+                subject: {
+                  select: {
+                    id: true,
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        }),
+      ]);
+
+      return res.json({ programmes });
+    }
+
+    if (universityFilter.length > 0) {
+      const [programmes, count] = await Promise.all([
+        await prisma.programme.findMany({
+          skip: (page - 1) * pageSize,
+          take: pageSize,
+          where: {
+            university: {
+              id: {
+                in: universityFilter,
+              },
+            },
+          },
+          select: {
+            id: true,
+            name: true,
+            duration: true,
+            medium: true,
+            keywords: true,
+            university: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+            course: {
+              select: {
+                id: true,
+                name: true,
+                subject: {
+                  select: {
+                    id: true,
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        }),
+
+        await prisma.programme.count(),
+      ]);
+
+      return res.json({ programmes, count, pageSize, page });
+    }
 
     // no queries, get all programmes
     if (queries.length < 1) {
