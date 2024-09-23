@@ -2,20 +2,22 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const {
   findWithQueriesAndUni,
-  countWithQueries,
   findWithQueries,
   findWithUni,
   findWithoutAny,
   findWithQueriesAndFilters,
   findWithQueriesAndSubjects,
   findWithSubjects,
+} = require('../prisma/queries');
+const {
+  countWithQueries,
   countWithQueriesAndFilters,
   countWithQueriesAndSubjects,
-  countWithSubjects,
   countWithQueriesAndUni,
+  countWithSubjects,
   countWithUni,
   countWithoutAny,
-} = require('../prisma/queries');
+} = require('../prisma/counts');
 const { calculateRelevance } = require('../utils/calculateRelevence');
 
 async function searchProgrammes(req, res) {

@@ -96,37 +96,6 @@ async function findWithQueriesAndUni({
   });
 }
 
-async function countWithQueriesAndUni({ queries, universityFilter }) {
-  return await prisma.programme.count({
-    where: {
-      AND: [
-        {
-          OR: queries.map((word) => ({
-            OR: [...searchFields(word)],
-          })),
-        },
-        {
-          university: {
-            id: {
-              in: universityFilter,
-            },
-          },
-        },
-      ],
-    },
-  });
-}
-
-async function countWithQueries(queries) {
-  return await prisma.programme.count({
-    where: {
-      OR: queries.map((word) => ({
-        OR: [...searchFields(word)],
-      })),
-    },
-  });
-}
-
 async function findWithQueries({ page, pageSize, queries }) {
   return await prisma.programme.findMany({
     ...paginationFields(page, pageSize),
@@ -155,16 +124,6 @@ async function findWithUni({ page, pageSize, universityFilter }) {
   });
 }
 
-async function countWithUni(universityFilter) {
-  return await prisma.programme.count({
-    where: {
-      universityId: {
-        in: universityFilter,
-      },
-    },
-  });
-}
-
 async function findWithoutAny({ page, pageSize }) {
   return await prisma.programme.findMany({
     ...paginationFields(page, pageSize),
@@ -172,10 +131,6 @@ async function findWithoutAny({ page, pageSize }) {
       ...selectFields,
     },
   });
-}
-
-async function countWithoutAny() {
-  return await prisma.programme.findMany({});
 }
 
 async function findWithQueriesAndFilters({
@@ -214,36 +169,6 @@ async function findWithQueriesAndFilters({
   });
 }
 
-async function countWithQueriesAndFilters({
-  queries,
-  universityFilter,
-  subjectFilter,
-}) {
-  return await prisma.programme.count({
-    where: {
-      AND: [
-        {
-          OR: queries.map((word) => ({
-            OR: [...searchFields(word)],
-          })),
-        },
-        {
-          universityId: {
-            in: universityFilter,
-          },
-        },
-        {
-          course: {
-            subjectId: {
-              in: subjectFilter,
-            },
-          },
-        },
-      ],
-    },
-  });
-}
-
 async function findWithQueriesAndSubjects({
   page,
   pageSize,
@@ -274,27 +199,6 @@ async function findWithQueriesAndSubjects({
   });
 }
 
-async function countWithQueriesAndSubjects({ queries, subjectFilter }) {
-  return await prisma.programme.count({
-    where: {
-      AND: [
-        {
-          OR: queries.map((word) => ({
-            OR: [...searchFields(word)],
-          })),
-        },
-        {
-          course: {
-            subjectId: {
-              in: subjectFilter,
-            },
-          },
-        },
-      ],
-    },
-  });
-}
-
 // find with subjects without queries
 async function findWithSubjects({ page, pageSize, subjectFilter }) {
   return await prisma.programme.findMany({
@@ -312,31 +216,12 @@ async function findWithSubjects({ page, pageSize, subjectFilter }) {
   });
 }
 
-async function countWithSubjects(subjectFilter) {
-  return await prisma.programme.count({
-    where: {
-      course: {
-        subjectId: {
-          in: subjectFilter,
-        },
-      },
-    },
-  });
-}
-
 module.exports = {
   findWithQueriesAndUni,
-  countWithQueriesAndUni,
-  countWithQueries,
   findWithQueries,
   findWithUni,
-  countWithUni,
   findWithoutAny,
-  countWithoutAny,
   findWithQueriesAndFilters,
   findWithQueriesAndSubjects,
   findWithSubjects,
-  countWithSubjects,
-  countWithQueriesAndFilters,
-  countWithQueriesAndSubjects,
 };
