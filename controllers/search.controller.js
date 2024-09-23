@@ -1,332 +1,195 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const {
+  findWithQueriesAndUni,
+  countWithQueries,
+  findWithQueries,
+  findWithUni,
+  findWithoutAny,
+  findWithQueriesAndFilters,
+  findWithQueriesAndSubjects,
+  findWithSubjects,
+  countWithQueriesAndFilters,
+  countWithQueriesAndSubjects,
+  countWithSubjects,
+  countWithQueriesAndUni,
+  countWithUni,
+  countWithoutAny,
+} = require('../prisma/queries');
+const { calculateRelevance } = require('../utils/calculateRelevence');
 
-async function searchDB(req, res) {
+async function searchProgrammes(req, res) {
   try {
-    // get search queries
+    // getting search query
+    // converts to lowercase, split into individual words, trim and filter out empty strings
     const q = (req.query.q || '').toLowerCase();
     const queries = q
       .split(' ')
-      .map((term) => term.trim())
-      .filter((term) => term.length > 0);
-    const page = isNaN(+(req.query.page || 1)) ? 1 : +(req.query.page || 1);
+      .map((query) => query.trim())
+      .filter((query) => query.length > 0);
+
+    // getting page number
+    // converts to an int, if not a number or is not provided defaults to 1
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+
     const pageSize = 8;
+
+    // getting university filter
+    // split into individual ids, trims, filter out empty values and keeps only numbers
     const universityFilter = (req.query.university || '')
       .split(',')
-      .map((term) => term.trim())
-      .filter((term) => term.length > 0)
-      .map((term) => {
-        const number = Number(term);
-        return isNaN(number) ? term : number;
+      .map((id) => id.trim())
+      .filter((id) => id.length > 0 && !isNaN(Number(id)))
+      .map(Number);
+
+    const subjectFilter = (req.query.subject || '')
+      .split(',')
+      .map((id) => id.trim())
+      .filter((id) => id.length > 0 && !isNaN(Number(id)))
+      .map(Number);
+
+    console.log(universityFilter, subjectFilter);
+
+    // university filter, subject filter and queries
+    if (
+      universityFilter.length > 0 &&
+      subjectFilter.length > 0 &&
+      queries.length > 0
+    ) {
+      const [programmes, count] = await Promise.all([
+        findWithQueriesAndFilters({
+          page,
+          pageSize,
+          queries,
+          universityFilter,
+          subjectFilter,
+        }),
+        countWithQueriesAndFilters({
+          queries,
+          universityFilter,
+          subjectFilter,
+        }),
+      ]);
+
+      if (programmes.length < 1) {
+        return res.sendStatus(404);
+      }
+
+      return res.json({
+        programmes: calculateRelevance(programmes, queries),
+        count,
+        pageSize,
+        page,
       });
+    }
 
-    console.log(universityFilter);
+    // subject filter and queries
+    if (subjectFilter.length > 0 && queries.length > 0) {
+      const [programmes, count] = await Promise.all([
+        findWithQueriesAndSubjects({ page, pageSize, queries, subjectFilter }),
+        countWithQueriesAndSubjects({ queries, subjectFilter }),
+      ]);
 
+      if (programmes.length < 1) {
+        return res.sendStatus(404);
+      }
+
+      return res.json({
+        programmes: calculateRelevance(programmes, queries),
+        count,
+        pageSize,
+        page,
+      });
+    }
+
+    // subject filter without queries
+    if (subjectFilter.length > 0) {
+      const [programmes, count] = await Promise.all([
+        findWithSubjects(page, pageSize, subjectFilter),
+        countWithSubjects(subjectFilter),
+      ]);
+
+      if (programmes.length < 1) {
+        return res.sendStatus(404);
+      }
+
+      return res.json({
+        programmes,
+        count,
+        pageSize,
+        page,
+      });
+    }
+
+    // univesity filter and queries
     if (universityFilter.length > 0 && queries.length > 0) {
-      const [programmes] = await Promise.all([
-        await prisma.programme.findMany({
-          skip: (page - 1) * pageSize,
-          take: pageSize,
-          where: {
-            AND: [
-              {
-                OR: queries.map((term) => ({
-                  OR: [
-                    {
-                      name: {
-                        contains: term,
-                        mode: 'insensitive',
-                      },
-                    },
-                    {
-                      course: {
-                        name: {
-                          contains: term,
-                          mode: 'insensitive',
-                        },
-                      },
-                    },
-                    {
-                      university: {
-                        name: {
-                          contains: term,
-                          mode: 'insensitive',
-                        },
-                      },
-                    },
-                    {
-                      keywords: {
-                        has: term,
-                      },
-                    },
-                  ],
-                })),
-              },
-              {
-                university: {
-                  id: {
-                    in: universityFilter,
-                  },
-                },
-              },
-            ],
-          },
-          select: {
-            id: true,
-            name: true,
-            duration: true,
-            medium: true,
-            keywords: true,
-            university: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
-            course: {
-              select: {
-                id: true,
-                name: true,
-                subject: {
-                  select: {
-                    id: true,
-                    name: true,
-                  },
-                },
-              },
-            },
-          },
-        }),
+      const [programmes, count] = await Promise.all([
+        findWithQueriesAndUni({ page, pageSize, queries, universityFilter }),
+        countWithQueriesAndUni({ queries, universityFilter }),
       ]);
 
-      return res.json({ programmes });
+      if (programmes.length < 1) {
+        return res.sendStatus(404);
+      }
+
+      return res.json({
+        programmes: calculateRelevance(programmes, queries),
+        count,
+        pageSize,
+        page,
+      });
     }
 
+    // university filter without queries
     if (universityFilter.length > 0) {
-      const [programmes, count] = await Promise.all([
-        await prisma.programme.findMany({
-          skip: (page - 1) * pageSize,
-          take: pageSize,
-          where: {
-            university: {
-              id: {
-                in: universityFilter,
-              },
-            },
-          },
-          select: {
-            id: true,
-            name: true,
-            duration: true,
-            medium: true,
-            keywords: true,
-            university: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
-            course: {
-              select: {
-                id: true,
-                name: true,
-                subject: {
-                  select: {
-                    id: true,
-                    name: true,
-                  },
-                },
-              },
-            },
-          },
+      const [programmes, count] = Promise.all([
+        findWithUni({
+          page,
+          pageSize,
+          universityFilter,
         }),
-
-        await prisma.programme.count(),
+        countWithUni(universityFilter),
       ]);
+
+      if (programmes.length < 1) {
+        return res.sendStatus(404);
+      }
 
       return res.json({ programmes, count, pageSize, page });
     }
 
-    // no queries, get all programmes
-    if (queries.length < 1) {
+    // queries only
+    if (queries.length > 0) {
       const [programmes, count] = await Promise.all([
-        await prisma.programme.findMany({
-          skip: (page - 1) * pageSize,
-          take: pageSize,
-          select: {
-            id: true,
-            name: true,
-            duration: true,
-            medium: true,
-            university: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
-            course: {
-              select: {
-                id: true,
-                name: true,
-                subject: {
-                  select: {
-                    id: true,
-                    name: true,
-                  },
-                },
-              },
-            },
-          },
-        }),
-        await prisma.programme.count(),
+        findWithQueries({ page, pageSize, queries }),
+        countWithQueries(queries),
       ]);
-      return res.json({ programmes, count, pageSize, page });
+
+      if (programmes.length < 1) {
+        return res.sendStatus(404);
+      }
+
+      return res.json({
+        programmes: calculateRelevance(programmes, queries),
+        count,
+        pageSize,
+        count,
+        pageSize,
+        page,
+      });
     }
 
-    console.log(queries);
-
-    // search for programmes with matching queries
-    const [programmes, count] = await Promise.all([
-      await prisma.programme.findMany({
-        skip: (page - 1) * pageSize,
-        take: pageSize,
-        where: {
-          OR: queries.map((term) => ({
-            OR: [
-              {
-                name: {
-                  contains: term,
-                  mode: 'insensitive',
-                },
-              },
-              {
-                course: {
-                  name: {
-                    contains: term,
-                    mode: 'insensitive',
-                  },
-                },
-              },
-              {
-                university: {
-                  name: {
-                    contains: term,
-                    mode: 'insensitive',
-                  },
-                },
-              },
-              {
-                keywords: {
-                  has: term,
-                },
-              },
-            ],
-          })),
-        },
-        select: {
-          id: true,
-          name: true,
-          duration: true,
-          medium: true,
-          keywords: true,
-          university: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-          course: {
-            select: {
-              id: true,
-              name: true,
-              subject: {
-                select: {
-                  id: true,
-                  name: true,
-                },
-              },
-            },
-          },
-        },
-      }),
-      await prisma.programme.count({
-        where: {
-          OR: queries.map((term) => ({
-            OR: [
-              {
-                name: {
-                  contains: term,
-                  mode: 'insensitive',
-                },
-              },
-              {
-                course: {
-                  name: {
-                    contains: term,
-                    mode: 'insensitive',
-                  },
-                },
-              },
-              {
-                university: {
-                  name: {
-                    contains: term,
-                    mode: 'insensitive',
-                  },
-                },
-              },
-              {
-                keywords: {
-                  has: term,
-                },
-              },
-            ],
-          })),
-        },
-      }),
+    // no filters and no queries
+    const [programmes, count] = Promise.all([
+      findWithoutAny({ page, pageSize }),
+      countWithoutAny(),
     ]);
 
-    // no results
     if (programmes.length < 1) {
       return res.sendStatus(404);
     }
 
-    console.log(programmes);
-
-    // sort searched results based on relevence
-    const programmesWithRelevance = programmes.map((programme) => {
-      let relevance = 0;
-
-      queries.forEach((term) => {
-        if (programme.name.toLowerCase().includes(term)) {
-          relevance++;
-        }
-
-        if (programme.course.name.toLowerCase().includes(term)) {
-          relevance++;
-        }
-
-        if (programme.university.name.toLowerCase().includes(term)) {
-          relevance++;
-        }
-
-        programme.keywords.forEach((k) => {
-          if (k.toLowerCase().includes(term)) relevance++;
-        });
-      });
-
-      return { ...programme, relevance };
-    });
-    programmesWithRelevance.sort((a, b) => b.relevance - a.relevance);
-
-    return res.json({
-      programmes: programmesWithRelevance,
-      count,
-      pageSize,
-      count,
-      pageSize,
-      page,
-    });
+    return res.json({ programmes, count, pageSize, page });
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
@@ -335,4 +198,4 @@ async function searchDB(req, res) {
   }
 }
 
-module.exports = searchDB;
+module.exports = searchProgrammes;
