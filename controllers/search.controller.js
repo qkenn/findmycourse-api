@@ -8,6 +8,7 @@ const {
   findWithQueriesAndFilters,
   findWithQueriesAndSubjects,
   findWithSubjects,
+  filterWithoutQueries,
 } = require('../prisma/queries');
 const {
   countWithQueries,
@@ -17,6 +18,7 @@ const {
   countWithSubjects,
   countWithUni,
   countWithoutAny,
+  countWithoutQueries,
 } = require('../prisma/counts');
 const { calculateRelevance } = require('../utils/calculateRelevence');
 
@@ -50,6 +52,7 @@ async function searchProgrammes(req, res) {
       .filter((id) => id.length > 0 && !isNaN(Number(id)))
       .map(Number);
 
+    console.log(req.url);
     console.log(universityFilter, subjectFilter);
 
     // university filter, subject filter and queries
@@ -85,11 +88,25 @@ async function searchProgrammes(req, res) {
       });
     }
 
-    // subject filter and queries
-    if (subjectFilter.length > 0 && queries.length > 0) {
+    // university filter and subject filter without queries
+    if (
+      universityFilter.length > 0 &&
+      subjectFilter.length > 0 &&
+      queries.length < 1
+    ) {
       const [programmes, count] = await Promise.all([
-        findWithQueriesAndSubjects({ page, pageSize, queries, subjectFilter }),
-        countWithQueriesAndSubjects({ queries, subjectFilter }),
+        findWithQueriesAndFilters({
+          page,
+          pageSize,
+          queries,
+          universityFilter,
+          subjectFilter,
+        }),
+        countWithQueriesAndFilters({
+          queries,
+          universityFilter,
+          subjectFilter,
+        }),
       ]);
 
       if (programmes.length < 1) {
@@ -104,10 +121,34 @@ async function searchProgrammes(req, res) {
       });
     }
 
+    // subject filter and queries
+    if (subjectFilter.length > 0 && queries.length > 0) {
+      const [programmes, count] = await Promise.all([
+        filterWithoutQueries({
+          page,
+          pageSize,
+          subjectFilter,
+          universityFilter,
+        }),
+        countWithoutQueries({ subjectFilter, universityFilter }),
+      ]);
+
+      if (programmes.length < 1) {
+        return res.sendStatus(404);
+      }
+
+      return res.json({
+        programmes,
+        count,
+        pageSize,
+        page,
+      });
+    }
+
     // subject filter without queries
     if (subjectFilter.length > 0) {
       const [programmes, count] = await Promise.all([
-        findWithSubjects(page, pageSize, subjectFilter),
+        findWithSubjects({ page, pageSize, subjectFilter }),
         countWithSubjects(subjectFilter),
       ]);
 
@@ -144,7 +185,7 @@ async function searchProgrammes(req, res) {
 
     // university filter without queries
     if (universityFilter.length > 0) {
-      const [programmes, count] = Promise.all([
+      const [programmes, count] = await Promise.all([
         findWithUni({
           page,
           pageSize,
@@ -182,7 +223,7 @@ async function searchProgrammes(req, res) {
     }
 
     // no filters and no queries
-    const [programmes, count] = Promise.all([
+    const [programmes, count] = await Promise.all([
       findWithoutAny({ page, pageSize }),
       countWithoutAny(),
     ]);

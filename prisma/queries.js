@@ -216,6 +216,30 @@ async function findWithSubjects({ page, pageSize, subjectFilter }) {
   });
 }
 
+async function filterWithoutQueries({
+  page,
+  pageSize,
+  subjectFilter,
+  universityFilter,
+}) {
+  return await prisma.programme.findMany({
+    ...paginationFields(page, pageSize),
+    where: {
+      course: {
+        subjectId: {
+          in: subjectFilter,
+        },
+      },
+      universityId: {
+        in: universityFilter,
+      },
+    },
+    select: {
+      ...selectFields,
+    },
+  });
+}
+
 module.exports = {
   findWithQueriesAndUni,
   findWithQueries,
@@ -224,4 +248,5 @@ module.exports = {
   findWithQueriesAndFilters,
   findWithQueriesAndSubjects,
   findWithSubjects,
+  filterWithoutQueries,
 };

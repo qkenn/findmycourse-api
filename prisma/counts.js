@@ -75,7 +75,7 @@ async function countWithUni(universityFilter) {
 }
 
 async function countWithoutAny() {
-  return await prisma.programme.findMany({});
+  return await prisma.programme.count({});
 }
 
 async function countWithQueriesAndFilters({
@@ -141,6 +141,21 @@ async function countWithSubjects(subjectFilter) {
   });
 }
 
+async function countWithoutQueries({ subjectFilter, universityFilter }) {
+  return await prisma.programme.count({
+    where: {
+      course: {
+        subjectId: {
+          in: subjectFilter,
+        },
+      },
+      universityId: {
+        in: universityFilter,
+      },
+    },
+  });
+}
+
 module.exports = {
   countWithQueries,
   countWithQueriesAndFilters,
@@ -149,4 +164,5 @@ module.exports = {
   countWithSubjects,
   countWithUni,
   countWithoutAny,
+  countWithoutQueries,
 };
