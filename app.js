@@ -21,7 +21,7 @@ app.use('/api/universities', uniRouter);
 app.use('/api/programmes', programmeRouter);
 app.use('/api/subjects', subjectRouter);
 app.use('/api/courses', courseRouter);
-app.use('*', (req, res) => res.status(404));
+app.use('*', (req, res) => res.sendStatus(404));
 
 // main error middleware
 app.use((err, req, res, next) => {
