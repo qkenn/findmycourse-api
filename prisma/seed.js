@@ -2,10 +2,10 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 // data imports
-const subjects = require('./data/subjects.json');
-const universities = require('./data/universities.json');
-const courses = require('./data/courses.json');
-const programmes = require('./data/programmes.json');
+const subjects = require('../lib/data/subjects.json');
+const universities = require('../lib/data/universities.json');
+const courses = require('../lib/data/courses.json');
+const programmes = require('../lib/data/programmes.json');
 
 // create db entries utility
 async function createEntries(model, data) {

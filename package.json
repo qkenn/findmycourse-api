@@ -4,8 +4,11 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "prisma generate && prisma migrate deploy && node app.js",
     "dev": "node --watch app.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
